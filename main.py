@@ -51,3 +51,20 @@ def binary_search(listi , start_point, end_point, number):
 
 sorted_list = [-1,0,1,2,3,4,7,9,10,20]
 print(binary_search(listi = sorted_list,start_point = 0,end_point = len(sorted_list),number = 10))
+
+def fibonacci(number):
+    if number == 0 or number == 1:
+        return number
+        
+    return fibonacci(number-1) + fibonacci(number-2)
+    
+print(fibonacci(10))
+
+listi = []
+def return_fibonacci_list(number):
+    if number < 2:
+        return listi
+    listi.append(fibonacci(number))
+    return return_fibonacci_list(number-1)
+    
+print(return_fibonacci_list(10))
