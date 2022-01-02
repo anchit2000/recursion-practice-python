@@ -68,3 +68,68 @@ def return_fibonacci_list(number):
     return return_fibonacci_list(number-1)
     
 print(return_fibonacci_list(10))
+
+def merge_sort(array, low, high):
+    
+    if low < high:
+        
+        middle = (low+high)//2
+        
+        merge_sort(array,low, middle)
+        
+        merge_sort(array, middle+1, high)
+        
+        merge(array, low, middle, high)
+        
+        # print(array[low:middle])
+        
+def merge(arr , low, middle, high):
+
+    n1 = middle - low +1
+    n2 = high - middle 
+ 
+    L = [0] * (n1)
+    R = [0] * (n2)
+ 
+    for i in range(0, n1):
+        try:
+            L[i] = arr[low + i]
+        except:
+            print(i)
+ 
+    for j in range(0, n2):
+        try:
+            R[j] = arr[middle + 1 + j]
+        except:
+            print(j)
+ 
+    i = 0   
+    j = 0   
+    k = low
+    
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
+        
+    while i < n1:
+        arr[k] = L[i]
+        i += 1
+        k += 1
+ 
+    while j < n2:
+        arr[k] = R[j]
+        j += 1
+        k += 1
+
+
+
+array = [4,0,6,1,5,2,3]
+
+merge_sort(array,0,len(array)-1)
+
+print(array)
