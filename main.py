@@ -69,67 +69,58 @@ def return_fibonacci_list(number):
     
 print(return_fibonacci_list(10))
 
-def merge_sort(array, low, high):
-    
-    if low < high:
-        
-        middle = (low+high)//2
-        
-        merge_sort(array,low, middle)
-        
-        merge_sort(array, middle+1, high)
-        
-        merge(array, low, middle, high)
-        
-        # print(array[low:middle])
-        
-def merge(arr , low, middle, high):
+def merge_sort(listi, left, right):
+    if left < right:
+        middle = (left + right) // 2
+        merge_sort(listi, left, middle)
+        merge_sort(listi, middle + 1, right)
+        merge(listi, left, right, middle)
 
-    n1 = middle - low +1
-    n2 = high - middle 
- 
-    L = [0] * (n1)
-    R = [0] * (n2)
- 
-    for i in range(0, n1):
-        try:
-            L[i] = arr[low + i]
-        except:
-            print(i)
- 
-    for j in range(0, n2):
-        try:
-            R[j] = arr[middle + 1 + j]
-        except:
-            print(j)
- 
-    i = 0   
-    j = 0   
-    k = low
-    
-    while i < n1 and j < n2:
-        if L[i] <= R[j]:
-            arr[k] = L[i]
-            i += 1
+
+def merge(listi, left, right, middle):
+    l = listi[left:middle + 1]
+    r = listi[middle + 1:right + 1]
+    i,j,k = 0,0,left
+    while i < len(l) and j < len(r):
+        if l[i] < r[j]:
+            listi[k] = l[i]
+            i+=1
         else:
-            arr[k] = R[j]
-            j += 1
-        k += 1
-        
-    while i < n1:
-        arr[k] = L[i]
-        i += 1
-        k += 1
- 
-    while j < n2:
-        arr[k] = R[j]
-        j += 1
-        k += 1
+            listi[k] = r[j]
+            j+=1
+        k+=1
+    while i < len(l):
+        listi[k] = l[i]
+        i+=1
+        k+=1
+    while j < len(r):
+        listi = r[j]
+        j+=1
+        k+=1
 
+test_list = [4, 3, 10, 2, 5]
+test_list2 = [12, 11, 13, 5, 6, 7]
+test_list3 = [4,0,6,1,5,2,3]
+merge_sort(test_list, 0, 4)
+print(test_list)
+merge_sort(test_list2, 0, len(test_list2)-1)
+print(test_list2)
+merge_sort(test_list3, 0, len(test_list3) - 1)
+print(test_list3)
+# call stack = [(0,4),(0,2), (0,1), (0,0)]
+# ---- left = 0, right = 4
+# ---- condition check : true
+# ---- middle = 2
+# ---- calls reccur (0, 2)
+# ---- condition check True
+# ---- middle = 1
+# ---- calls reccur (0,1)
+# ---- condition check True
+# ---- calls reccur (0,0)
+# ---- condition check False returns None
+# ---- pops (0,0) from call stack
+# call stack = [(0,4),(0,2), (0,1)]
+# ---- will finish (0,1) calls now
+# ---- calls right side now (0,0) returns None
+# ---- calls merge(0,0,1)
 
-
-array = [4,0,6,1,5,2,3]
-
-merge_sort(array,0,len(array)-1)
-
-print(array)
