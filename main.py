@@ -124,3 +124,44 @@ print(test_list3)
 # ---- calls right side now (0,0) returns None
 # ---- calls merge(0,0,1)
 
+
+def print_list(head):
+    if not head:
+        print(head)
+    curr = head
+    while curr:
+        print(curr.val)
+        curr = curr.nxt
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.nxt = None
+
+def reverse_linked_list(head):
+    if not head or not head.nxt:
+        return head
+    p = reverse_linked_list(head.nxt)
+    head.nxt.nxt = head
+    head.nxt = None
+    return p
+    
+# 1 - 2 - 3 - 4 - 5
+# 5 - 4 - 3 - 2 - 1
+head = Node(1)
+one = Node(2)
+two = Node(3)
+three = Node(4)
+four = Node(5)
+head.nxt = one
+one.nxt = two
+two.nxt = three
+three.nxt = four
+
+print_list(head)
+
+p = reverse_linked_list(head)
+print("************")
+
+print_list(p)
+    
